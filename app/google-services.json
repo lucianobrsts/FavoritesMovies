@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "164969504427",
+    "firebase_url": "https://favoritesmovies-886c7.firebaseio.com",
+    "project_id": "favoritesmovies-886c7",
+    "storage_bucket": "favoritesmovies-886c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164969504427:android:8ca9965086af7f8b",
+        "android_client_info": {
+          "package_name": "unit7.dev.favoritesmovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164969504427-ie0kp80sgl3gk73lgnjbkjc6d3i0frih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "unit7.dev.favoritesmovies",
+            "certificate_hash": "2e09c59c7be6441762d9b9152a8300ed6f722baa"
+          }
+        },
+        {
+          "client_id": "164969504427-cfte4t7nh1464rdjj0236u208n361oh8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "164969504427-cfte4t7nh1464rdjj0236u208n361oh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2GhWsQ7ju8rCS5ew-i1J0n9PZPtl9iSE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164969504427-cfte4t7nh1464rdjj0236u208n361oh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
