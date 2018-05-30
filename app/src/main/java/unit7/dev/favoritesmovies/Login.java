@@ -45,7 +45,12 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = editEmail.getText().toString().trim();
                 String senha = editSenha.getText().toString().trim();
-                login(email, senha);
+
+                if (!email.isEmpty() && !senha.isEmpty()) {
+                    login(email, senha);
+                } else {
+                    alert("Os campos email e senha são obrigatórios.");
+                }
             }
         });
 

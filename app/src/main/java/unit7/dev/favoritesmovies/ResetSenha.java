@@ -31,7 +31,11 @@ public class ResetSenha extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = editEmail.getText().toString().trim();
-                resetSenha(email);
+                if(!email.isEmpty()) {
+                    resetSenha(email);
+                }else {
+                    alert("Email é obrigratório.");
+                }
             }
         });
     }
@@ -41,7 +45,7 @@ public class ResetSenha extends AppCompatActivity {
                 .addOnCompleteListener(ResetSenha.this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             alert("Um email foi enviado para alterar sua senha.");
                             finish();
                         } else {
@@ -52,7 +56,7 @@ public class ResetSenha extends AppCompatActivity {
     }
 
     private void alert(String s) {
-        Toast.makeText(ResetSenha.this,s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResetSenha.this, s, Toast.LENGTH_SHORT).show();
     }
 
     private void inicializaComponentes() {

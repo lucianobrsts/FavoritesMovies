@@ -40,7 +40,15 @@ public class Cadastro extends AppCompatActivity {
             public void onClick(View v) {
                 String email = editEmail.getText().toString();
                 String senha = editSenha.getText().toString();
-                criarUser(email, senha);
+                if (!email.isEmpty() && !senha.isEmpty()) {
+                    if (senha.length() >= 6) {
+                        criarUser(email, senha);
+                    } else {
+                        alert("Senha de 6 dígitos.");
+                    }
+                } else {
+                    alert("Os campos email e senha são obrigatórios.");
+                }
             }
         });
     }
@@ -50,9 +58,9 @@ public class Cadastro extends AppCompatActivity {
                 .addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             alert("Usuário cadastrado com sucesso.");
-                            Intent i = new Intent(Cadastro.this, Perfil.class);
+                            Intent i = new Intent(Cadastro.this, Login.class);
                             startActivity(i);
                             finish();
                         } else {
