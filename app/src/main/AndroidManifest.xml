@@ -21,7 +21,7 @@
         <activity android:name=".Cadastro" />
         <activity android:name=".Perfil" />
         <activity android:name=".ResetSenha" />
-        <activity android:name=".Home"></activity>
+        <activity android:name=".Home" />
     </application>
 
 </manifest>
