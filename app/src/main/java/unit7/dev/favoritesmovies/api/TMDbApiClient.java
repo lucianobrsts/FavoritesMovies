@@ -1,15 +1,11 @@
 package unit7.dev.favoritesmovies.api;
 
-import java.io.IOException;
-import java.util.Locale;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import unit7.dev.favoritesmovies.model.MovieListingDTO;
 
 public class TMDbApiClient {
 
-    private TMDbServiceAPI api;
+    /*private TMDbServiceAPI api;
     private String language;
 
     public TMDbApiClient() {
@@ -24,5 +20,18 @@ public class TMDbApiClient {
     public MovieListingDTO getTopMovies(int page) throws IOException {
         return this.api.getMostPopular(TMDbServiceAPI.API_KEY, page, this.language).execute()
                 .body();
+    }*/
+
+    public static final String BASE_URL = "http://api.themoviedb.org/3/";
+    public static Retrofit retrofit = null;
+
+    public static Retrofit getTMDbApiClient(){
+        if(retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
     }
 }

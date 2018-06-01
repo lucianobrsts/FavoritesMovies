@@ -3,4 +3,8 @@
     <color name="colorPrimary">#2d2f3c</color>
     <color name="colorPrimaryDark">#030516</color>
     <color name="colorAccent">#565866</color>
+
+    <color name="viewBd">#f1f5f8</color>
+    <color name="movie_title">#4c4c4c</color>
+    <color name="white">#FFF</color>
 </resources>

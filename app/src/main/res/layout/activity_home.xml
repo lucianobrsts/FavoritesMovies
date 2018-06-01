@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_vertical"
+    android:background="@color/white"
     tools:context=".activity.HomeActivity">
 
-    <FrameLayout
+    <include layout="@layout/content_home" />
+
+    <!--<FrameLayout
         android:id="@+id/frame_layout"
         android:animateLayoutChanges="true"
         android:layout_width="match_parent"
@@ -24,6 +27,6 @@
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@drawable/nav_item_color_state"
         app:menu="@menu/bottom_menu"
-        />
+        />-->
 
-</RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
