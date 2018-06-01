@@ -1,4 +1,4 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +12,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ResetSenha extends AppCompatActivity {
+import unit7.dev.favoritesmovies.R;
+
+public class ResetSenhaActivity extends AppCompatActivity {
 
     private EditText editEmail;
     private Button btnResetSenha;
@@ -42,7 +44,7 @@ public class ResetSenha extends AppCompatActivity {
 
     private void resetSenha(String email) {
         auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(ResetSenha.this, new OnCompleteListener<Void>() {
+                .addOnCompleteListener(ResetSenhaActivity.this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
@@ -56,7 +58,7 @@ public class ResetSenha extends AppCompatActivity {
     }
 
     private void alert(String s) {
-        Toast.makeText(ResetSenha.this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResetSenhaActivity.this, s, Toast.LENGTH_SHORT).show();
     }
 
     private void inicializaComponentes() {
@@ -67,6 +69,6 @@ public class ResetSenha extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
+        auth = ConexaoActivity.getFirebaseAuth();
     }
 }

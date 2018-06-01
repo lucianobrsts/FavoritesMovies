@@ -1,9 +1,11 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Home extends AppCompatActivity {
+import unit7.dev.favoritesmovies.R;
+
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

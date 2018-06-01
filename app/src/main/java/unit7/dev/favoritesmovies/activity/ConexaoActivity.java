@@ -1,17 +1,17 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Conexao {
+public class ConexaoActivity {
 
     private static FirebaseAuth firebaseAuth;
     private static FirebaseAuth.AuthStateListener authStateListener;
     private static FirebaseUser firebaseUser;
 
-    private Conexao() {
+    private ConexaoActivity() {
     }
 
     public static FirebaseAuth getFirebaseAuth() {
