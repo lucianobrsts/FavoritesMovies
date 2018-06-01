@@ -1,4 +1,4 @@
-package unit7.dev.favoritesmovies.api.entity;
+package unit7.dev.favoritesmovies.model;
 
 public class MovieListDTO {
 

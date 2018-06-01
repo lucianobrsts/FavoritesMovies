@@ -5,7 +5,7 @@ import java.util.Locale;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import unit7.dev.favoritesmovies.api.entity.MovieListingDTO;
+import unit7.dev.favoritesmovies.model.MovieListingDTO;
 
 public class TMDbApiClient {
 
