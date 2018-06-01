@@ -1,4 +1,4 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Login extends AppCompatActivity {
+import unit7.dev.favoritesmovies.R;
+
+public class LoginActivity extends AppCompatActivity {
 
     private EditText editEmail, editSenha;
     private Button btnLogar, btnNovo;
@@ -35,7 +37,7 @@ public class Login extends AppCompatActivity {
         btnNovo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Cadastro.class);
+                Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +59,7 @@ public class Login extends AppCompatActivity {
         txtResetSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Login.this, ResetSenha.class);
+                Intent i = new Intent(LoginActivity.this, ResetSenhaActivity.class);
                 startActivity(i);
             }
         });
@@ -65,11 +67,11 @@ public class Login extends AppCompatActivity {
 
     private void login(String email, String senha) {
         auth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            Intent i = new Intent(Login.this, Home.class);
+                            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(i);
                         }else {
                             alert("Email ou senha inválido.");
@@ -79,7 +81,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void alert(String s) {
-        Toast.makeText(Login.this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
     }
 
     private void inicializaComponentes() {
@@ -93,6 +95,6 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
+        auth = ConexaoActivity.getFirebaseAuth();
     }
 }

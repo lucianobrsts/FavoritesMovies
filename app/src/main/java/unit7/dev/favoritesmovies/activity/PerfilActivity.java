@@ -1,4 +1,4 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Perfil extends AppCompatActivity {
+import unit7.dev.favoritesmovies.R;
+
+public class PerfilActivity extends AppCompatActivity {
 
     private TextView textEmail, textId;
     private Button btnLogOut;
@@ -30,7 +32,7 @@ public class Perfil extends AppCompatActivity {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Conexao.logout();
+                ConexaoActivity.logout();
                 finish();
             }
         });
@@ -45,8 +47,8 @@ public class Perfil extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
-        user = Conexao.getFirebaseUser();
+        auth = ConexaoActivity.getFirebaseAuth();
+        user = ConexaoActivity.getFirebaseUser();
         verificaUser();
     }
 

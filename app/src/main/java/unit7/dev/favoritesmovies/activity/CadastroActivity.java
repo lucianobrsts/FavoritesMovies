@@ -1,4 +1,4 @@
-package unit7.dev.favoritesmovies;
+package unit7.dev.favoritesmovies.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Cadastro extends AppCompatActivity {
+import unit7.dev.favoritesmovies.R;
+
+public class CadastroActivity extends AppCompatActivity {
 
     private EditText editEmail, editSenha;
     private Button btnRegistrar, btnVoltar;
@@ -55,12 +57,12 @@ public class Cadastro extends AppCompatActivity {
 
     private void criarUser(String email, String senha) {
         auth.createUserWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             alert("Usuário cadastrado com sucesso.");
-                            Intent i = new Intent(Cadastro.this, Login.class);
+                            Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
                             startActivity(i);
                             finish();
                         } else {
@@ -71,7 +73,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void alert(String msg) {
-        Toast.makeText(Cadastro.this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(CadastroActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void inicializaComponentes() {
@@ -84,6 +86,6 @@ public class Cadastro extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
+        auth = ConexaoActivity.getFirebaseAuth();
     }
 }
