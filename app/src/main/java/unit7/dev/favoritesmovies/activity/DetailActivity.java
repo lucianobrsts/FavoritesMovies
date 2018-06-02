@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import unit7.dev.favoritesmovies.R;
 
 public class DetailActivity extends AppCompatActivity {
@@ -86,5 +88,4 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-
 }
