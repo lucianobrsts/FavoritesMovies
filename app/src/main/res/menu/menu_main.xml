@@ -3,9 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/menu_filmes"
+        android:title="@string/action_filmes"
         android:orderInCategory="100"
-        app:showAsAction="never"
+        android:icon="@drawable/ic_movie_filter_white_24dp"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/menu_favoritos"
+        android:title="@string/action_favoritos"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_star_white_24dp"
+        app:showAsAction="ifRoom"
         />
 </menu>

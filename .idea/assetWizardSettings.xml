@@ -75,7 +75,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_star_black_24dp" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_star_white_24dp" />
                             <entry key="sourceFile" value="C:\Users\luciano Brito" />
                           </map>
                         </option>

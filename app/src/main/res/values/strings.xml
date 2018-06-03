@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Favorites Movies</string>
 
-    <string name="action_settings">Configurações</string>
+    <string name="action_filmes">Filmes</string>
+    <string name="action_favoritos">Favoritos</string>
     <string name="name_movie">Titulo do Filme</string>
     <string name="movie_details">Detalhes do Filme</string>
     <string name="plot">Sinopse</string>
@@ -11,4 +12,7 @@
     <string name="pref_sort_order_key">ordemDeClassificacao</string>
     <string name="pref_most_popular">Filme mais popular</string>
     <string name="pref_highest_rated">Melhor filme avaliado</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

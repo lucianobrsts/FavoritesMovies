@@ -136,9 +136,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_settings:
+            case R.id.menu_filmes:
+                Toast.makeText(getApplicationContext(),"Lista de Filmes",Toast.LENGTH_SHORT).show();
                 return true;
-
+            case R.id.menu_favoritos:
+                Toast.makeText(getApplicationContext(), "Favoritos", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
