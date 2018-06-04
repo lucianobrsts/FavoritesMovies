@@ -74,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Buscando filmes...");
         progressDialog.setCancelable(false);
-        progressDialog.dismiss();
+        progressDialog.show();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
     private void loadJSON() {
         try{
             if(BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Por favor, obtenha a API Key primeiramente do themoviedb.org", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Por favor, primeiramente obtenha a API Key do themoviedb.org", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 return;
             }

@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_margin_left"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/layout_margin_top2"
                 android:layout_below="@+id/title" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_marginLeft="@dimen/layout_margin_left"
                 android:layout_marginTop="@dimen/layout_margin_top"
                 android:padding="@dimen/padding_layout"
-                android:layout_below="@+id/userRating" />
+                android:layout_below="@+id/release" />
 
         </LinearLayout>
 

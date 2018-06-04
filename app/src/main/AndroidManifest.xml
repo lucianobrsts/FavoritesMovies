@@ -23,7 +23,7 @@
         <activity android:name=".activity.CadastroActivity" />
         <activity android:name=".activity.PerfilActivity" />
         <activity android:name=".activity.ResetSenhaActivity" />
-        <activity android:name=".activity.HomeActivity"></activity>
+        <activity android:name=".activity.HomeActivity" />
 
         <activity
             android:name=".activity.DetailActivity"
@@ -34,6 +34,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.HomeActivity" />
         </activity>
+
 
     </application>
 
