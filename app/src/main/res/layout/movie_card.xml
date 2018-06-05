@@ -23,8 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/movie_cover_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                />
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/title"

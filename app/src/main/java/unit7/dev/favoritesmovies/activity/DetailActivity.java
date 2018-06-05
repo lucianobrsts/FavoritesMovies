@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import unit7.dev.favoritesmovies.R;
 
@@ -46,10 +46,7 @@ public class DetailActivity extends AppCompatActivity {
             String rating = getIntent().getExtras().getString("vote_average");
             String dateRelease = getIntent().getExtras().getString("release_date");
 
-            Glide.with(this)
-                    .load(thumbnail)
-                    .placeholder(R.drawable.load)
-                    .into(imageView);
+            Picasso.get().load(thumbnail).placeholder(R.drawable.load).into(imageView);
 
             nameMovie.setText(movieName);
             plotSynopsis.setText(synopsis);

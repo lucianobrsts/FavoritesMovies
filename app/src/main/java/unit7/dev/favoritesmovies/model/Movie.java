@@ -17,7 +17,7 @@ public class Movie {
     private String original_language;
     private String overview;
 
-    String baseImageUrl = "http://image.tmdb.org/t/p/w500";
+    String baseImageUrl = "http://image.tmdb.org/t/p/w185";
 
     public int getId() {
         return id;
@@ -36,7 +36,7 @@ public class Movie {
     }
 
     public String getPoster_path() {
-        return baseImageUrl + poster_path;
+        return "http://image.tmdb.org/t/p/w185" + poster_path;
     }
 
     public void setPoster_path(String poster_path) {

@@ -8,16 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import unit7.dev.favoritesmovies.R;
 import unit7.dev.favoritesmovies.activity.DetailActivity;
 import unit7.dev.favoritesmovies.model.Movie;
-import unit7.dev.favoritesmovies.viewHolder.MyViewHolder;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder>{
 
@@ -46,31 +44,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         String vote = Double.toString(movieList.get(i).getVote_average());
         viewHolder.userRating.setText(vote);
 
-        Glide.with(mContext)
-                .load(movieList.get(i).getPoster_path())
-                .placeholder(R.drawable.load)
-                .into(viewHolder.thumbnail);
+        Picasso.get().load(movieList.get(i).getPoster_path()).placeholder(R.drawable.load).into(viewHolder.thumbnail);
     }
 
     @Override
     public int getItemCount() {
         return movieList.size();
-    }
-
-    public Context getmContext() {
-        return mContext;
-    }
-
-    public void setmContext(Context mContext) {
-        this.mContext = mContext;
-    }
-
-    public List<Movie> getMovieList() {
-        return movieList;
-    }
-
-    public void setMovieList(List<Movie> movieList) {
-        this.movieList = movieList;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -87,19 +66,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION) {
-                        Movie clickedDataItem = movieList.get(position);
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        Movie clickedDataItem = movieList.get(pos);
+
                         Intent intent = new Intent(mContext, DetailActivity.class);
-                        intent.putExtra("original_title", movieList.get(position).getOriginal_title());
-                        intent.putExtra("poster_path", movieList.get(position).getPoster_path());
-                        intent.putExtra("overview", movieList.get(position).getOverview());
-                        intent.putExtra("vote_average", Double.toString(movieList.get(position).getVote_average()));
-                        intent.putExtra("release", movieList.get(position).getRelease_date());
+                        intent.putExtra("original_title", movieList.get(pos).getOriginal_title());
+                        intent.putExtra("poster_path", movieList.get(pos).getPoster_path());
+                        intent.putExtra("overview", movieList.get(pos).getOverview());
+                        intent.putExtra("vote_average", Double.toString(movieList.get(pos).getVote_average()));
+                        intent.putExtra("release", movieList.get(pos).getRelease_date());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                         mContext.startActivity(intent);
-                        Toast.makeText(view.getContext(), "Você clicou " + clickedDataItem.getOriginal_title(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

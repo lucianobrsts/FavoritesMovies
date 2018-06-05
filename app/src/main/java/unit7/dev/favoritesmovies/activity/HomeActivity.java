@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
                 return;
             }
             TMDbApiClient client = new TMDbApiClient();
-            TMDbService apiService = TMDbApiClient.getTMDbApiClient().create(TMDbService.class);
+            TMDbService apiService = client.getTMDbApiClient().create(TMDbService.class);
             Call<MovieResponse> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, "pt-BR");
             call.enqueue(new Callback<MovieResponse>() {
                 @Override
@@ -139,9 +139,11 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.menu_filmes:
                 Toast.makeText(getApplicationContext(),"Lista de Filmes",Toast.LENGTH_SHORT).show();
                 return true;
+
             case R.id.menu_favoritos:
                 Toast.makeText(getApplicationContext(), "Favoritos", Toast.LENGTH_SHORT).show();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
