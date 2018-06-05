@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import unit7.dev.favoritesmovies.R;
-import unit7.dev.favoritesmovies.activity.DetailActivity;
+import unit7.dev.favoritesmovies.activity.DetalharActivity;
 import unit7.dev.favoritesmovies.model.Movie;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder>{
@@ -70,7 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     if(pos != RecyclerView.NO_POSITION) {
                         Movie clickedDataItem = movieList.get(pos);
 
-                        Intent intent = new Intent(mContext, DetailActivity.class);
+                        Intent intent = new Intent(mContext, DetalharActivity.class);
                         intent.putExtra("original_title", movieList.get(pos).getOriginal_title());
                         intent.putExtra("poster_path", movieList.get(pos).getPoster_path());
                         intent.putExtra("overview", movieList.get(pos).getOverview());

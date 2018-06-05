@@ -21,14 +21,14 @@ import unit7.dev.favoritesmovies.R;
 import unit7.dev.favoritesmovies.data.FavoriteDbHelper;
 import unit7.dev.favoritesmovies.model.Movie;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetalharActivity extends AppCompatActivity {
 
     TextView nameMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;
 
     private FavoriteDbHelper favoriteDbHelper;
     private Movie favorite;
-    private final AppCompatActivity activity = DetailActivity.this;
+    private final AppCompatActivity activity = DetalharActivity.this;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
                         if(favorite) {
-                            SharedPreferences.Editor editor = getSharedPreferences("DetailActivity", MODE_PRIVATE).edit();
+                            SharedPreferences.Editor editor = getSharedPreferences("DetalharActivity", MODE_PRIVATE).edit();
                             editor.putBoolean("Favorito Adicionado", true);
                             editor.commit();
                             saveFavorite();
@@ -84,10 +84,10 @@ public class DetailActivity extends AppCompatActivity {
                                     Snackbar.LENGTH_SHORT).show();
                         } else {
                             int movie_id = getIntent().getExtras().getInt("id");
-                            favoriteDbHelper = new FavoriteDbHelper(DetailActivity.this);
+                            favoriteDbHelper = new FavoriteDbHelper(DetalharActivity.this);
                             favoriteDbHelper.deleteFavorite(movie_id);
 
-                            SharedPreferences.Editor editor = getSharedPreferences("DetailActivity", MODE_PRIVATE).edit();
+                            SharedPreferences.Editor editor = getSharedPreferences("DetalharActivity", MODE_PRIVATE).edit();
                             editor.putBoolean("Favorito Removido", true);
                             editor.commit();
                             Snackbar.make(buttonView, "Removido dos Favoritos.",
