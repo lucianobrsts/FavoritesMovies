@@ -21,7 +21,7 @@ import unit7.dev.favoritesmovies.R;
 import unit7.dev.favoritesmovies.data.FavoriteDbHelper;
 import unit7.dev.favoritesmovies.model.Movie;
 
-public class DetalharActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     TextView nameMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;

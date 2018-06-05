@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -164,7 +165,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_filmes:
-                Toast.makeText(getApplicationContext(),"Lista de Filmes",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.menu_favoritos:
