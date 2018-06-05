@@ -31,7 +31,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 int position = getAdapterPosition();
                 adapter = new MoviesAdapter();
+
                 if(position != RecyclerView.NO_POSITION) {
+
                     Movie clickedDataItem = adapter.getMovieList().get(position);
                     Intent intent = new Intent(adapter.getmContext(), DetailActivity.class);
                     intent.putExtra("original_title", adapter.getMovieList().get(position).getOriginal_title());

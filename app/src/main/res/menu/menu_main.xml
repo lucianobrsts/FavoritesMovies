@@ -6,7 +6,7 @@
         android:id="@+id/menu_filmes"
         android:title="@string/action_filmes"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_movie_filter_white_24dp"
+        android:icon="@drawable/ic_movie_filter_black_24dp"
         app:showAsAction="ifRoom"
         />
 
@@ -14,7 +14,7 @@
         android:id="@+id/menu_favoritos"
         android:title="@string/action_favoritos"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_star_white_24dp"
+        android:icon="@drawable/ic_star_black_24dp"
         app:showAsAction="ifRoom"
         />
 </menu>

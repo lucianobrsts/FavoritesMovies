@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
             }
             TMDbApiClient client = new TMDbApiClient();
             TMDbService apiService = TMDbApiClient.getTMDbApiClient().create(TMDbService.class);
-            Call<MovieResponse> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN);
+            Call<MovieResponse> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, "pt-BR");
             call.enqueue(new Callback<MovieResponse>() {
                 @Override
                 public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {

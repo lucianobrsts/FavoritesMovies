@@ -9,5 +9,6 @@ import unit7.dev.favoritesmovies.model.MovieResponse;
 public interface TMDbService {
 
     @GET("movie/popular")
-    Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);
+    Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey,
+                                         @Query("language") String language);
 }
