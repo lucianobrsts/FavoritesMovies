@@ -31,7 +31,7 @@
         <activity android:name=".activity.PerfilActivity" />
 
         <activity
-            android:name=".activity.DetailActivity"
+            android:name=".activity.DetalharActivity"
             android:label="Filmes"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".activity.HomeActivity">
