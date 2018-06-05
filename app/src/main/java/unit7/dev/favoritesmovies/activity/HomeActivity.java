@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -27,6 +29,7 @@ import unit7.dev.favoritesmovies.R;
 import unit7.dev.favoritesmovies.adapter.MoviesAdapter;
 import unit7.dev.favoritesmovies.api.TMDbApiClient;
 import unit7.dev.favoritesmovies.api.TMDbService;
+import unit7.dev.favoritesmovies.data.FavoriteDbHelper;
 import unit7.dev.favoritesmovies.model.Movie;
 import unit7.dev.favoritesmovies.model.MovieResponse;
 
@@ -38,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     private MoviesAdapter adapter;
     private List<Movie> movieList;
     private SwipeRefreshLayout swipeContainer;
+    private FavoriteDbHelper favoriteDbHelper;
+    private AppCompatActivity activity = HomeActivity.this;
 
     ProgressDialog progressDialog;
 
@@ -48,15 +53,6 @@ public class HomeActivity extends AppCompatActivity {
 
         initView();
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.home_content);
-        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initView();
-                Toast.makeText(HomeActivity.this, "Filmes atualizados", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private Activity getAtivity() {
@@ -89,8 +85,39 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        favoriteDbHelper = new FavoriteDbHelper(activity);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.home_content);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initView();
+                Toast.makeText(HomeActivity.this, "Filmes atualizados", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         loadJSON();
+    }
+
+    private void initViews2() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        movieList = new ArrayList<>();
+        adapter = new MoviesAdapter(this, movieList);
+
+        if(getAtivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        favoriteDbHelper = new FavoriteDbHelper(activity);
+
+        getAllFavorite();
     }
 
     private void loadJSON() {
@@ -147,5 +174,21 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void getAllFavorite() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+               movieList.clear();
+               movieList.addAll(favoriteDbHelper.getAllFavorite());
+               return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                adapter.notifyDataSetChanged();
+            }
+        }.execute();
     }
 }

@@ -1,24 +1,34 @@
 package unit7.dev.favoritesmovies.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.squareup.picasso.Picasso;
 
 import unit7.dev.favoritesmovies.R;
+import unit7.dev.favoritesmovies.data.FavoriteDbHelper;
+import unit7.dev.favoritesmovies.model.Movie;
 
 public class DetailActivity extends AppCompatActivity {
 
     TextView nameMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;
+
+    private FavoriteDbHelper favoriteDbHelper;
+    private Movie favorite;
+    private final AppCompatActivity activity = DetailActivity.this;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +66,36 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Sem dados da API", Toast.LENGTH_SHORT).show();
         }
+
+        MaterialFavoriteButton materialFavoriteButtonNice = (MaterialFavoriteButton) findViewById(R.id.favorite_button);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        materialFavoriteButtonNice.setOnFavoriteChangeListener(
+                new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                    @Override
+                    public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                        if(favorite) {
+                            SharedPreferences.Editor editor = getSharedPreferences("DetailActivity", MODE_PRIVATE).edit();
+                            editor.putBoolean("Favorito Adicionado", true);
+                            editor.commit();
+                            saveFavorite();
+                            Snackbar.make(buttonView, "Adicionado aos Favoritos.",
+                                    Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            int movie_id = getIntent().getExtras().getInt("id");
+                            favoriteDbHelper = new FavoriteDbHelper(DetailActivity.this);
+                            favoriteDbHelper.deleteFavorite(movie_id);
+
+                            SharedPreferences.Editor editor = getSharedPreferences("DetailActivity", MODE_PRIVATE).edit();
+                            editor.putBoolean("Favorito Removido", true);
+                            editor.commit();
+                            Snackbar.make(buttonView, "Removido dos Favoritos.",
+                                    Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
     }
 
     private void initCollapseToolbar() {
@@ -85,4 +125,21 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void saveFavorite() {
+        favoriteDbHelper = new FavoriteDbHelper(activity);
+        favorite = new Movie();
+        int movie_id = getIntent().getExtras().getInt("id");
+        String rate = getIntent().getExtras().getString("vote_average");
+        String poster = getIntent().getExtras().getString("poster_path");
+
+        favorite.setId(movie_id);
+        favorite.setOriginal_title(nameMovie.getText().toString().trim());
+        favorite.setPoster_path(poster);
+        favorite.setVote_average(Double.parseDouble(rate));
+        favorite.setOverview(plotSynopsis.getText().toString().trim());
+
+        favoriteDbHelper.addFavorite(favorite);
+    }
+
 }

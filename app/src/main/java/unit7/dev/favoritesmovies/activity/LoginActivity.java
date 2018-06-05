@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(i);
+                            finish();
                         }else {
                             alert("Email ou senha inválido.");
                         }

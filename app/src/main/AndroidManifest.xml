@@ -12,18 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.LoginActivity">
+        <activity android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.CadastroActivity" />
-        <activity android:name=".activity.PerfilActivity" />
-        <activity android:name=".activity.ResetSenhaActivity" />
+        <activity android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.CadastroActivity" />
+
+
+        <activity android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activity.ResetSenhaActivity" />
+
         <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.PerfilActivity" />
 
         <activity
             android:name=".activity.DetailActivity"

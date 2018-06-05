@@ -66,7 +66,7 @@ public class CadastroActivity extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         } else {
-                            alert("Erro ao cadastrar o usuário.");
+                            alert("Email já cadastrado ou sem conexão.");
                         }
                     }
                 });

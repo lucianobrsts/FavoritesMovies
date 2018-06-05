@@ -17,6 +17,10 @@ public class Movie {
     private String original_language;
     private String overview;
 
+    public Movie() {
+
+    }
+
     String baseImageUrl = "http://image.tmdb.org/t/p/w185";
 
     public int getId() {
