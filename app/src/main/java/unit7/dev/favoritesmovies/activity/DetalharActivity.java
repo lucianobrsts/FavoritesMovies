@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import unit7.dev.favoritesmovies.R;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetalharActivity extends AppCompatActivity {
 
     TextView nameMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;
@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detalhe);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,15 +38,15 @@ public class DetailActivity extends AppCompatActivity {
         userRating = (TextView) findViewById(R.id.userRating);
         releaseDate = (TextView) findViewById(R.id.releaseDate);
 
-        Intent intentThatStartedThisActivity = getIntent();
-        if(intentThatStartedThisActivity.hasExtra("original_title")){
+        Intent intentIniciaEssaActivity = getIntent();
+        if(intentIniciaEssaActivity.hasExtra("original_title")){
             String thumbnail = getIntent().getExtras().getString("poster_path");
             String movieName = getIntent().getExtras().getString("original_title");
             String synopsis = getIntent().getExtras().getString("overview");
             String rating = getIntent().getExtras().getString("vote_average");
             String dateRelease = getIntent().getExtras().getString("release_date");
 
-            Picasso.get().load(thumbnail).placeholder(R.drawable.load).into(imageView);
+            Picasso.get().load(thumbnail).placeholder(R.drawable.loading).into(imageView);
 
             nameMovie.setText(movieName);
             plotSynopsis.setText(synopsis);
