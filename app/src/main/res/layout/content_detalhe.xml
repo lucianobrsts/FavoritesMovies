@@ -22,14 +22,16 @@
 
             <com.github.ivbaranov.mfb.MaterialFavoriteButton
                 android:id="@+id/favorite_button"
-                android:layout_width="89dp"
-                android:layout_height="79dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="160dp"
                 app:layout_constraintBottom_toTopOf="@+id/userRating"
                 app:layout_constraintLeft_toRightOf="@+id/userRating"
                 app:layout_constraintRight_toLeftOf="@+id/userRating"
-                app:layout_constraintTop_toBottomOf="@+id/userRating" />
+                app:layout_constraintTop_toBottomOf="@+id/userRating"
+                android:background="@color/colorAccent"
+                />
 
             <TextView
                 android:id="@+id/movieTitle"

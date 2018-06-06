@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         favoriteDbHelper = new FavoriteDbHelper(activity);
 
-        getAllFavorite();
+       getAllFavorite();
     }
 
     private void loadJSON() {
@@ -165,12 +165,11 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_filmes:
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-                startActivity(intent);
+                initView();
                 return true;
 
             case R.id.menu_favoritos:
-                Toast.makeText(getApplicationContext(), "Favoritos", Toast.LENGTH_SHORT).show();
+                initViews2();
                 return true;
 
             default:
