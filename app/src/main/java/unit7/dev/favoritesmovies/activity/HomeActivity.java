@@ -118,6 +118,16 @@ public class HomeActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         favoriteDbHelper = new FavoriteDbHelper(activity);
 
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.home_content);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initViews2();
+                Toast.makeText(HomeActivity.this, "Favoritos atualizados", Toast.LENGTH_SHORT).show();
+            }
+        });
+
        getAllFavorite();
     }
 
