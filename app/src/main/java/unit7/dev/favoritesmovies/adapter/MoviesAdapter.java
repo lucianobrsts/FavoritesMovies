@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -69,15 +70,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION) {
                         Movie clickedDataItem = movieList.get(pos);
-
                         Intent intent = new Intent(mContext, DetalharActivity.class);
-                        intent.putExtra("original_title", movieList.get(pos).getOriginal_title());
-                        intent.putExtra("poster_path", movieList.get(pos).getPoster_path());
-                        intent.putExtra("overview", movieList.get(pos).getOverview());
-                        intent.putExtra("vote_average", Double.toString(movieList.get(pos).getVote_average()));
-                        intent.putExtra("release", movieList.get(pos).getRelease_date());
+                        intent.putExtra("movies", clickedDataItem );
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                         mContext.startActivity(intent);
                     }
                 }

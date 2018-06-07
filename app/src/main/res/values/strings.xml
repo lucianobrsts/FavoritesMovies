@@ -28,5 +28,6 @@
     <string name="pref_most_popular">Filme mais popular</string>
     <string name="pref_highest_rated">Melhor filme avaliado</string>
     <string name="favorite">Filmes Favoritos</string>
+    <string name="trailer">Trailer</string>
 
 </resources>
