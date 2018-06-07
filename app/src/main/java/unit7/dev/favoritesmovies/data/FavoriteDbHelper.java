@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,6 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
                 FavoriteContract.FavoriteEntry.COLUMN_USERRATING,
                 FavoriteContract.FavoriteEntry.COLUMN_POSTER_PATH,
                 FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS
-
         };
         String sortOrder =
                 FavoriteContract.FavoriteEntry._ID + " ASC";
@@ -113,7 +113,7 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
 
                 favoriteList.add(movie);
 
-            }while(cursor.moveToNext());
+            } while(cursor.moveToNext());
         }
         cursor.close();
         db.close();

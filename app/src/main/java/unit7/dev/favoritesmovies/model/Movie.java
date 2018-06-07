@@ -25,7 +25,7 @@ public class Movie implements Parcelable {
 
     }
 
-    String baseImageUrl = "http://image.tmdb.org/t/p/w185";
+    String baseImageUrl = "http://image.tmdb.org/t/p/w500";
 
     public int getId() {
         return id;
@@ -44,7 +44,7 @@ public class Movie implements Parcelable {
     }
 
     public String getPoster_path() {
-        return "http://image.tmdb.org/t/p/w185" + poster_path;
+        return "http://image.tmdb.org/t/p/w500" + poster_path;
     }
 
     public void setPoster_path(String poster_path) {

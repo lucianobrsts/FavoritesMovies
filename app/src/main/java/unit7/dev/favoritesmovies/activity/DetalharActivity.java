@@ -64,7 +64,6 @@ public class DetalharActivity extends AppCompatActivity {
         FavoriteDbHelper dbHelper = new FavoriteDbHelper(this);
         mDb = dbHelper.getWritableDatabase();
 
-
         imageView = (ImageView) findViewById(R.id.thumbnail_image_header);
         plotSynopsis = (TextView) findViewById(R.id.plotsynopsis);
         userRating = (TextView) findViewById(R.id.userrating);
@@ -72,7 +71,6 @@ public class DetalharActivity extends AppCompatActivity {
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra("movies")){
-
             movie = getIntent().getParcelableExtra("movies");
 
             thumbnail = movie.getPoster_path();
@@ -82,9 +80,7 @@ public class DetalharActivity extends AppCompatActivity {
             dateOfRelease = movie.getRelease_date();
             movie_id = movie.getId();
 
-            String poster = "https://image.tmdb.org/t/p/w185" + thumbnail;
-
-            Picasso.get().load(poster).placeholder(R.drawable.loading).into(imageView);
+            Picasso.get().load(thumbnail).placeholder(R.drawable.loading).into(imageView);
 
             plotSynopsis.setText(synopsis);
             userRating.setText(rating);

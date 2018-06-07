@@ -70,7 +70,6 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
             context = ((ContextWrapper) context).getBaseContext();
         }
         return null;
-
     }
 
     private void initViewsMovies(){
