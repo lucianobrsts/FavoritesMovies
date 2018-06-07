@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,7 @@ import unit7.dev.favoritesmovies.model.Trailer;
 import unit7.dev.favoritesmovies.model.TrailerResponse;
 
 public class DetalharActivity extends AppCompatActivity {
+
     TextView nameOfMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;
     private RecyclerView recyclerView;
@@ -65,10 +66,9 @@ public class DetalharActivity extends AppCompatActivity {
 
 
         imageView = (ImageView) findViewById(R.id.thumbnail_image_header);
-       // nameOfMovie = (TextView) findViewById(R.id.title);
-        plotSynopsis = (TextView) findViewById(R.id.plotSynopsis);
-        userRating = (TextView) findViewById(R.id.userRating);
-        releaseDate = (TextView) findViewById(R.id.releaseDate);
+        plotSynopsis = (TextView) findViewById(R.id.plotsynopsis);
+        userRating = (TextView) findViewById(R.id.userrating);
+        releaseDate = (TextView) findViewById(R.id.releasedate);
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra("movies")){
@@ -82,72 +82,60 @@ public class DetalharActivity extends AppCompatActivity {
             dateOfRelease = movie.getRelease_date();
             movie_id = movie.getId();
 
-            String poster = "https://image.tmdb.org/t/p/w500" + thumbnail;
+            String poster = "https://image.tmdb.org/t/p/w185" + thumbnail;
 
-            Glide.with(this)
-                    .load(poster)
-                    .placeholder(R.drawable.load)
-                    .into(imageView);
+            Picasso.get().load(poster).placeholder(R.drawable.loading).into(imageView);
 
-          //  nameOfMovie.setText(movieName);
             plotSynopsis.setText(synopsis);
             userRating.setText(rating);
             releaseDate.setText(dateOfRelease);
 
-              ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar)).setTitle(movieName);
-
+            ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar)).setTitle(movieName);
         }else{
-            Toast.makeText(this, "Sem dados da API.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sem dados da API.", Toast.LENGTH_LONG).show();
         }
 
        MaterialFavoriteButton materialFavoriteButton = (MaterialFavoriteButton) findViewById(R.id.favorite_button);
 
-        if (Exists(movieName)){
+        if (exists(movieName)){
             materialFavoriteButton.setFavorite(true);
-            materialFavoriteButton.setOnFavoriteChangeListener(
-                    new MaterialFavoriteButton.OnFavoriteChangeListener() {
-                        @Override
-                        public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-                            if (favorite == true) {
-                                saveFavorite();
-                                Snackbar.make(buttonView, "Adicionado aos Favoritos",
-                                        Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                favoriteDbHelper = new FavoriteDbHelper(DetalharActivity.this);
-                                favoriteDbHelper.deleteFavorite(movie_id);
-                                Snackbar.make(buttonView, "Removido dos Favoritos",
-                                        Snackbar.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-
+            materialFavoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                @Override
+                public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                    if (favorite == true) {
+                        saveFavorite();
+                        Snackbar.make(buttonView, "Adicionado aos Favoritos",
+                                Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        favoriteDbHelper = new FavoriteDbHelper(DetalharActivity.this);
+                        favoriteDbHelper.deleteFavorite(movie_id);
+                        Snackbar.make(buttonView, "Removido dos Favoritos",
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }else {
-            materialFavoriteButton.setOnFavoriteChangeListener(
-                    new MaterialFavoriteButton.OnFavoriteChangeListener() {
-                        @Override
-                        public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-                            if (favorite == true) {
-                                saveFavorite();
-                                Snackbar.make(buttonView, "Adicionado aos Favoritos.",
-                                        Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                int movie_id = getIntent().getExtras().getInt("id");
-                                favoriteDbHelper = new FavoriteDbHelper(DetalharActivity.this);
-                                favoriteDbHelper.deleteFavorite(movie_id);
-                                Snackbar.make(buttonView, "Removido dos Favoritos.",
-                                        Snackbar.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
+            materialFavoriteButton.setOnFavoriteChangeListener(new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                @Override
+                public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                    if (favorite == true) {
+                        saveFavorite();
+                        Snackbar.make(buttonView, "Adicionado aos Favoritos.",
+                                Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        int movie_id = getIntent().getExtras().getInt("id");
+                        favoriteDbHelper = new FavoriteDbHelper(DetalharActivity.this);
+                        favoriteDbHelper.deleteFavorite(movie_id);
+                        Snackbar.make(buttonView, "Removido dos Favoritos.",
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
-
         initViews();
-
     }
 
-    public boolean Exists(String searchItem) {
+    public boolean exists(String searchItem) {
 
         String[] projection = {
                 FavoriteContract.FavoriteEntry._ID,
@@ -156,9 +144,8 @@ public class DetalharActivity extends AppCompatActivity {
                 FavoriteContract.FavoriteEntry.COLUMN_USERRATING,
                 FavoriteContract.FavoriteEntry.COLUMN_POSTER_PATH,
                 FavoriteContract.FavoriteEntry.COLUMN_PLOT_SYNOPSIS
-
         };
-        String selection = FavoriteContract.FavoriteEntry.COLUMN_TITLE + " =?";
+        String selection = FavoriteContract.FavoriteEntry.COLUMN_TITLE + " =? ";
         String[] selectionArgs = { searchItem };
         String limit = "1";
 
@@ -167,7 +154,6 @@ public class DetalharActivity extends AppCompatActivity {
         cursor.close();
         return exists;
     }
-
 
     private void initViews(){
         trailerList = new ArrayList<>();
@@ -184,7 +170,6 @@ public class DetalharActivity extends AppCompatActivity {
     }
 
     private void loadJSON(){
-
         try{
             if (BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
                 Toast.makeText(getApplicationContext(), "Por favor, primeiramente obtenha a API Key do themoviedb.org", Toast.LENGTH_SHORT).show();
@@ -209,7 +194,6 @@ public class DetalharActivity extends AppCompatActivity {
 
                 }
             });
-
         }catch (Exception e){
             Log.d("Erro", e.getMessage());
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -221,7 +205,6 @@ public class DetalharActivity extends AppCompatActivity {
         favorite = new Movie();
 
         Double rate = movie.getVote_average();
-
 
         favorite.setId(movie_id);
         favorite.setOriginal_title(movieName);

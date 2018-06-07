@@ -46,13 +46,12 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
     private AppCompatActivity activity = HomeActivity.this;
     public static final String LOG_TAG = MoviesAdapter.class.getName();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        initViews();
+        initViewsMovies();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -74,14 +73,11 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
 
     }
 
-    private void initViews(){
-
+    private void initViewsMovies(){
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         movieList = new ArrayList<>();
         adapter = new MoviesAdapter(this, movieList);
-
-
 
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -94,22 +90,19 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
         adapter.notifyDataSetChanged();
         favoriteDbHelper = new FavoriteDbHelper(activity);
 
-
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.home_content);
         swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh(){
-                initViews();
+                initViewsMovies();
                 Toast.makeText(HomeActivity.this, "Filmes Atualizados", Toast.LENGTH_SHORT).show();
             }
         });
-
         loadJSON();
-
     }
 
-    private void initViews2(){
+    private void initViewsFavorites(){
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         movieList = new ArrayList<>();
@@ -131,7 +124,7 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initViews2();
+                initViewsFavorites();
                 Toast.makeText(HomeActivity.this, "Favoritos atualizados", Toast.LENGTH_SHORT).show();
             }
         });
@@ -150,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
 
             TMDbApiClient client = new TMDbApiClient();
             TMDbService apiService = client.getTMDbApiClient().create(TMDbService.class);
-            Call<MovieResponse> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, null);
+            Call<MovieResponse> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN, "pt-BR");
             call.enqueue(new Callback<MovieResponse>() {
                 @Override
                 public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -177,42 +170,6 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    private void loadJSON1(){
-
-        try{
-            if (BuildConfig.THE_MOVIE_DB_API_TOKEN.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Por favor, primeiramente obtenha a API Key do themoviedb.org", Toast.LENGTH_SHORT).show();
-                pd.dismiss();
-                return;
-            }
-
-            TMDbApiClient client = new TMDbApiClient();
-            TMDbService apiService = TMDbApiClient.getTMDbApiClient().create(TMDbService.class);
-            Call<MovieResponse> call = apiService.getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN);
-            call.enqueue(new Callback<MovieResponse>() {
-                @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                    List<Movie> movies = response.body().getResults();
-                    recyclerView.setAdapter(new MoviesAdapter(getApplicationContext(), movies));
-                    recyclerView.smoothScrollToPosition(0);
-                    if (swipeContainer.isRefreshing()){
-                        swipeContainer.setRefreshing(false);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
-                    Log.d("Error", t.getMessage());
-                    Toast.makeText(HomeActivity.this, "Erro ao buscar dados", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }catch (Exception e){
-            Log.d("Erro:", e.getMessage());
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -223,11 +180,11 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_filmes:
-                initViews();
+                initViewsMovies();
                 return true;
 
             case R.id.menu_favoritos:
-                initViews2();
+                initViewsFavorites();
                 return true;
 
             default:
@@ -252,7 +209,5 @@ public class HomeActivity extends AppCompatActivity implements SharedPreferences
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-    }
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) { }
 }
